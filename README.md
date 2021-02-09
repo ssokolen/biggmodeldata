@@ -43,10 +43,10 @@ There are currently 5 basic functions:
 import biggmodeldata as bigg
 
 # Look-up reaction IDs based on EC number
-bigg.ecs("SUCD1")
+bigg.ids("1.3.5.1")
 
 # Look-up EC numbers corresponding to a reaction ID
-bigg.ids("1.3.5.1")
+bigg.ecs("SUCD1")
 
 # Look-up reaction reactants as a list of (stoichiometry, id) tuples
 # Note that reactant stoichiometric coefficients are negative
