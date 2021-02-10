@@ -36,26 +36,46 @@ The BiGG Models provided herein is on an "as is" basis, and the University of Ca
 
 ## Usage
 
-There are currently 5 basic functions:
+There are currently 5 basic functions oriented around reaction IDs:
+
+```python
+
+from biggmodeldata import reactions as r
+
+# Look-up reaction IDs based on EC number
+r.ids("1.3.5.1")
+
+# Look-up EC numbers corresponding to a reaction ID
+r.ecs("SUCD1")
+
+# Look-up reaction reactants as a list of (stoichiometry, id) tuples
+# Note that reactant stoichiometric coefficients are negative
+r.reactants("SUCD1")
+
+# Look-up reaction products as a list of (stoichiometry, id) tuples
+r.products("SUCD1")
+
+# Look-up all alternatives to a reaction id, defined as reactions involving
+# the same core metabolites (ignore cofactors and energetic compounds like ATP)
+r.alternatives("SUCD1")
+```
+
+Metabolite IDs may be expanded in the future, but for now, the metabolites module only serves to define a set of "helpers", molecules like ATP and NADH that assist enzymatic function without carrying mass flux.
+
+```python
+
+from biggmodeldata import metabolites as m
+
+# Note that helpers are defined across all possible compartments whether
+# this makes biological sense or not, so the list is a bit long
+m.helpers()
+```
+
+The package is distributed with data included, but you can use the `update_reactions` function to rebuild the databases based on the reaction lists provided by the [BIGG website]. Warning, this step hasn't been optimized and may take a couple of hours.
 
 ```python
 
 import biggmodeldata as bigg
 
-# Look-up reaction IDs based on EC number
-bigg.ids("1.3.5.1")
-
-# Look-up EC numbers corresponding to a reaction ID
-bigg.ecs("SUCD1")
-
-# Look-up reaction reactants as a list of (stoichiometry, id) tuples
-# Note that reactant stoichiometric coefficients are negative
-bigg.reactants("SUCD1")
-
-# Look-up reaction products as a list of (stoichiometry, id) tuples
-bigg.products("SUCD1")
-
-# Look-up all alternatives to a reaction id, defined as reactions involving
-# the same core metabolites (ignore cofactors and energetic compounds like ATP)
-bigg.alternatives("SUCD1")
+bigg.update_reactions()
 ```

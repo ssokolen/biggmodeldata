@@ -6,21 +6,21 @@ db_file = pkg_resources.resource_filename(
 )
 db = SqliteDatabase(db_file)
 
-class Names(Model):
+class ReactionNames(Model):
     rid = CharField()
     name = TextField()
 
     class Meta:
         database = db
 
-class ECs(Model):
+class ReactionECs(Model):
     rid = CharField()
     ec = CharField()
 
     class Meta:
         database = db
 
-class Metabolites(Model):
+class ReactionMetabolites(Model):
     rid = CharField()
     reversible = BooleanField()
     mid = CharField()
@@ -29,18 +29,18 @@ class Metabolites(Model):
     class Meta:
         database = db
 
-class Alternatives(Model):
+class ReactionAlternatives(Model):
     rid = CharField()
     alternative = CharField()
 
     class Meta:
         database = db
 
-tables = [Names, ECs, Metabolites, Alternatives]
+reaction_tables = [ReactionNames, ReactionECs, ReactionMetabolites, ReactionAlternatives]
 
 db.connect()
-db.create_tables(tables)
+db.create_tables(reaction_tables)
 
-def recreate_tables():
-    db.drop_tables(tables)
-    db.create_tables(tables)
+def recreate_reaction_tables():
+    db.drop_tables(reaction_tables)
+    db.create_tables(reaction_tables)

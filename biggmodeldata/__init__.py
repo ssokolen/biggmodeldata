@@ -1,3 +1,5 @@
-from .access import *
+from .update import update_reactions
 from .schema import *
-from .update import update
+
+from . import reactions
+from . import metabolites
